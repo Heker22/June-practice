@@ -1,4 +1,4 @@
-const API_KEY = "25c14c31fcb14225be481c89501840c7";
+/*const API_KEY = "25c14c31fcb14225be481c89501840c7";
 
 const button = document.getElementById('btn');
 const result = document.getElementById('result');
@@ -50,3 +50,41 @@ fetch(url)
         result.innerHTML = `<p class = "error">${error.message}</p>` });
 
 };
+
+
+//1
+
+const btn = document.getElementById('catBtn');
+const catDiv = document.getElementById('cat');
+
+btn.addEventListener('click', () => {
+    fetch('https://api.thecatapi.com/v1/images/search')
+    .then(res => res.json())
+    .then(data => {
+        catDiv.innerHTML = `
+        <img src="${data[0].url}" alt="cat" width="500" >`
+    })
+})
+*/
+
+//2
+
+
+const user = document.getElementById('user');
+const userDiv = document.getElementById('userDiv');
+
+user.addEventListener('click', () => {
+    fetch(' https://randomuser.me/api/')
+    .then(res => res.json())
+    .then(data => {
+        const user = data.results[0]
+        userDiv.innerHTML = `
+        <h3>${user.name.first} ${user.name.last}</h3>
+        <p>${user.email}</p>
+        <img src="${user.picture.medium}">`
+    })
+    .catch(error => {
+        userDiv.innerHTML = `error found`
+        console.log('error')
+    })
+})
