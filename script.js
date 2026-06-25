@@ -65,7 +65,7 @@ btn.addEventListener('click', () => {
         <img src="${data[0].url}" alt="cat" width="500" >`
     })
 })
-*/
+
 
 //2
 
@@ -86,5 +86,100 @@ user.addEventListener('click', () => {
     .catch(error => {
         userDiv.innerHTML = `error found`
         console.log('error')
+    })
+})
+
+
+//3
+
+const btn = document.getElementById('postBtn');
+const div = document.getElementById('box');
+
+btn.addEventListener('click', () => {
+   const randomID = Math.floor(Math.random() * 100)+1;
+    fetch(`https://jsonplaceholder.typicode.com/posts/${randomID}`)
+        .then(res => res.json())
+        .then(data => {
+            div.innerHTML = `
+        <h2>${data.title}</h2>
+        <h2>${data.body}</h2>`
+        })
+        .catch(error => {
+            div.innerHTML = `error`
+            console.log('error')
+        })
+})
+
+  //4
+const btn = document.getElementById('btn');
+const div = document.getElementById('box');
+
+btn.addEventListener('click', () => {
+    fetch(`https://restcountries.com/v3.1/name/ukraine`)
+        .then(res => res.json())
+        .then(data => {
+            const country = data[0]
+            div.innerHTML = `
+            <h1>${country.name.common}</h1>
+            <h3>${country.capital[0]}</h3>
+            <h3>${country.population}</h3>`
+        })
+        .catch(error => {
+            div.innerHTML = `error`
+            console.log('error')
+        })
+})
+
+//5
+
+const btn = document.getElementById('btn')
+const div = document.getElementById('box')
+
+btn.addEventListener('click', () => {
+    fetch(`https://dog.ceo/api/breeds/image/random`)
+    .then(res => res.json())
+    .then(data => {
+        div.innerHTML = `
+        <img src="${data.message}" alt="" width="500">`
+    })
+    .catch(error => {
+        div.innerHTML = `error`
+        console.log('error')
+    })
+})
+
+
+//6
+
+
+const btn = document.getElementById('btn')
+const div = document.getElementById('box')
+
+btn.addEventListener('click', () => {
+    fetch(`https://catfact.ninja/fact`)
+    .then(res => res.json())
+    .then(data => {
+        div.innerHTML = `
+        <h2>${data.fact}</h2>`
+    })
+    .catch(error => {
+        innerHTML = 'error'
+        console.log('error')         
+    })
+})*/
+
+const btn = document.getElementById('btn')
+const div = document.getElementById('div')
+
+btn.addEventListener('click', () => {
+    fetch(`https://api.adviceslip.com/advice`)
+    .then(res => res.json())
+    .then(data => {
+        div.innerHTML =  `
+        <p>${data.slip.advice}</p>`
+    })
+    .catch(error => {
+        innerHTML = `errorrrrr`
+        console.log('erorrrrrrr')
     })
 })
