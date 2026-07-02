@@ -182,7 +182,7 @@ btn.addEventListener('click', () => {
         innerHTML = `errorrrrr`
         console.log('erorrrrrrr')
     })
-})*/
+})
 
 let currentPage = 1;
 const limit = 2;
@@ -216,3 +216,71 @@ document.getElementById('prev').onclick = function(){
          getUsers();
 }
 }
+
+
+const dogs = document.getElementById('dogs');
+let isLoading = false;
+
+function loadDogs() {
+    isLoading = true;
+    dogs.innerHTML += `<p id="loading">loading...</p>`
+    setTimeout(() => {
+        fetch("https://dog.ceo/api/breeds/image/random/10")
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('loading').remove();
+                data.message.forEach(dog => {
+                    dogs.innerHTML += `<img src="${dog}" alt="dog">`
+                }
+                );
+                isLoading = false
+            });
+    }, 1000
+    )
+
+}
+
+loadDogs();
+
+window.addEventListener('scroll', () => {
+    if (!isLoading && window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 100
+    ) {
+        loadDogs();
+    }
+});*/
+
+
+const cats = document.getElementById('cats');
+const pagination = document.getElementById('pagination');
+const totalPages = 20;
+let currentPage = 1;
+
+function loadCats(page) {
+    fetch(`https://api.thecatapi.com/v1/images/search?limit=5&page=${page - 1}`)
+        .then(res => res.json())
+        .then(data => {
+            cats.innerHTML = '';
+            data.forEach(cat => cats.innerHTML +=
+                `<img src="${cat.url}" alt="cat" width="250">`
+            )
+        })
+}
+
+function createPagination() {
+    pagination.innerHTML = '';
+    for (let i = 1; i <= totalPages; i++) {
+        pagination.innerHTML += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page = "${i}" >${i}</button>`
+    }
+    document.querySelectorAll('.page-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            currentPage = Number(button.dataset.page);
+            loadCats(currentPage);
+            createPagination();
+
+        })
+    })
+}
+
+loadCats(currentPage);
+createPagination();

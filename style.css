@@ -1,0 +1,48 @@
+/* #dogs {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+      }
+
+      img {
+        width: 300px;
+        border-radius: 10px;
+      }
+      #loading {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+      }*/
+
+  
+    #cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+img {
+  width: 220px;
+  border-radius: 10px;
+}
+
+#pagination {
+  display: flex;
+  gap: 8px;
+}
+
+.page-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  background: #ddd;
+  border-radius: 5px;
+}
+
+.page-btn.active {
+  background: royalblue;
+  color: white;
+}
