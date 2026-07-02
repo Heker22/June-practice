@@ -166,7 +166,7 @@ btn.addEventListener('click', () => {
         innerHTML = 'error'
         console.log('error')         
     })
-})*/
+})
 
 const btn = document.getElementById('btn')
 const div = document.getElementById('div')
@@ -182,4 +182,37 @@ btn.addEventListener('click', () => {
         innerHTML = `errorrrrr`
         console.log('erorrrrrrr')
     })
-})
+})*/
+
+let currentPage = 1;
+const limit = 2;
+
+const usersDiv = document.getElementById('users')
+
+function getUsers(){
+    fetch(`https://jsonplaceholder.typicode.com/users?_page=${currentPage}&_limit=${limit} `)
+    .then(res => res.json())
+    .then(data => {
+        usersDiv.innerHTML = "";
+        data.forEach(user => {
+            usersDiv.innerHTML += `
+            <h3>${user.name}</h3>
+            <p>${user.email}</p>
+            <hr>`
+        }) 
+    })
+}
+
+getUsers()
+
+document.getElementById('next').onclick = function(){
+    currentPage++;
+    getUsers();
+}
+
+document.getElementById('prev').onclick = function(){
+    if(currentPage > 1){
+        currentPage--;
+         getUsers();
+}
+}
